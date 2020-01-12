@@ -26,13 +26,11 @@ function filter() {
     console.log(images[i].src);
 
     // send the image link to the background script
-    chrome.runtime.sendMessage({msg: 'image', link: imgUrl, index: i}, function({data, index}) {
-        console.log("response here");
-        console.log(data);
-        // images[index].src = data.link;
-        // console.log('done receiving message!' + data);
-      }
-    );
+    chrome.runtime.sendMessage({msg: 'image', link: imgUrl, index: i}, function(data, index) {
+      console.log("inside then");
+      console.log(data);
+      console.log("index: ", data.index);
+    });
   }
 }
 
