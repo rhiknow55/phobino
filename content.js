@@ -23,14 +23,14 @@ function filter() {
   for(let i = 0; i < images.length; i++){
     // First check if name has the phobia or synonyms in it
     let imgUrl = images[i].src;
+    console.log(images[i].src);
 
-
-    console.log();
-
-    // chrome.runtime.sendMessage({msg: 'image', index: i}, function({data, index}) {
-    //   images[index].src = data.link;
-    // });
-    //sdf
+    // send the image link to the background script
+    chrome.runtime.sendMessage({msg: 'image', link: imgUrl, index: i},function({data, index}) {
+        // images[index].src = data.link;
+        console.log('done receiving message!' + data);
+      }
+    );
   }
 }
 
@@ -40,4 +40,5 @@ function containsPhobiaString(value) {
   // and see if this string includes it
 
   // for (let i = 0; i < )
+  return true;
 }
