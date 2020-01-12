@@ -26,10 +26,16 @@ function filter() {
     console.log(images[i].src);
 
     // send the image link to the background script
-    chrome.runtime.sendMessage({msg: 'image', link: imgUrl, index: i}, function(data, index) {
+    chrome.runtime.sendMessage({msg: 'image', link: imgUrl, index: i}, function(data) {
       console.log("inside then");
       console.log(data);
       console.log("index: ", data.index);
+
+      for (let i = 0; i < data.data.length; i++) {
+        if (data.data[i].description.includes("Clip art")) {
+          images[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Bradypus.jpg/800px-Bradypus.jpg";
+        }
+      }
     });
   }
 }
