@@ -9,24 +9,34 @@ let phobiaText = document.getElementById('phobiaText')
 var list = document.getElementById('list');
 
 let phobiasList;
+
+// display phobia list if any
 chrome.storage.sync.get('phobias', function(data) {
+  if (data.phobias) {
   phobiasList = data.phobias;
 
-  for (let i = 0; i < phobiasList.length; i++) {
-    addToUI(phobiasList[i]);
+    for (let i = 0; i < phobiasList.length; i++) {
+      addToUI(phobiasList[i]);
+    }
   }
 });
 
 function setup() {
+  // run this whenever submit button is clicked
   submitButton.addEventListener('click', function() {
+    // only update list if text value is not null
     let phobia = phobiaText.value;
     if (!phobia) {
       return;
     }
 
-
+    // get list of phobias, if any, to append new phobia
     chrome.storage.sync.get('phobias', function(data) {
-      phobiasList = data.phobias;
+      phobiasList = [];
+      if (data.phobias) {
+        phobiasList = data.phobias;
+      }
+
       // Add the new phobia
       phobiasList.push(phobia);
       // Save the phobias list back to storage
@@ -34,7 +44,7 @@ function setup() {
         addToUI(phobia);
         // Clear the input text
         phobiaText.value = "";
-      });
+      })
     });
   });
 }
@@ -46,7 +56,5 @@ function addToUI(phobiaString) {
   entry.appendChild(document.createTextNode(phobiaString));
   list.appendChild(entry);
 }
-
-
 
 setup();
