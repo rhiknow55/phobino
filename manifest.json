@@ -1,6 +1,6 @@
 {
   "name": "PhobiNo",
-  "version": "0.1",
+  "version": "1.0",
   "description": "Say no to phobias!",
   "permissions": ["activeTab", "declarativeContent", "storage"],
   "options_page": "options.html",
