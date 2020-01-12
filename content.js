@@ -17,6 +17,8 @@ function filter() {
 
   console.log("Will filter because the extension is on!")
 
+  // TODO: get the phobias from storage
+
   let images = document.getElementsByTagName('img');
   for(let i = 0; i < images.length; i++){
     // First check if name has the phobia or synonyms in it
@@ -34,7 +36,8 @@ function filter() {
 
 // Return true if string contains any of the phobias and synonyms
 function containsPhobiaString(value) {
-
+  // TODO: use the phobiasList to check through them all
+  // and see if this string includes it
 
   // for (let i = 0; i < )
 }
