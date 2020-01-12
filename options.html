@@ -3,18 +3,20 @@
   <head>
     <style>
       button {
-        height: 30px;
-        width: 30px;
+        height: 20px;
+        width: 50px;
         outline: none;
-        margin: 10px;
       }
     </style>
   </head>
   <body>
-    <div id="buttonDiv">
-    </div>
     <div>
       <p>Set your phobias!</p>
+      <input type="text" id="phobiaText" placeholder="Write your phobia(s) here" size=30>
+      <br>
+      <button id="submit">Submit</button>
+      <br>
+      <ol id="list"></ol>
     </div>
   </body>
   <script src="options.js"></script>

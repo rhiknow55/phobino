@@ -19,9 +19,22 @@ function filter() {
 
   let images = document.getElementsByTagName('img');
   for(let i = 0; i < images.length; i++){
+    // First check if name has the phobia or synonyms in it
+    let imgUrl = images[i].src;
+
+
+    console.log();
+
     // chrome.runtime.sendMessage({msg: 'image', index: i}, function({data, index}) {
     //   images[index].src = data.link;
     // });
     //sdf
   }
+}
+
+// Return true if string contains any of the phobias and synonyms
+function containsPhobiaString(value) {
+
+
+  // for (let i = 0; i < )
 }
