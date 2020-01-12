@@ -10,6 +10,13 @@ chrome.storage.sync.get('toggle', function(data) {
   filter();
 });
 
+let phobiaList = [];
+chrome.storage.sync.get('phobias', function(data) {
+  if (data.phobias) {
+    phobiasList = data.phobias;
+  }
+});
+
 function filter() {
   if (!isOn) {
     return;
@@ -31,9 +38,12 @@ function filter() {
       console.log(data);
       console.log("index: ", data.index);
 
-      for (let i = 0; i < data.data.length; i++) {
-        if (data.data[i].description.includes("Clip art")) {
+      for (let j = 0; j < data.data.length; j++) {
+        if (containsPhobiaString(data.data[j].description)) {
+          console.log("nani");
           images[i].src = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Bradypus.jpg/800px-Bradypus.jpg";
+        } else {
+          continue;
         }
       }
     });
@@ -44,7 +54,14 @@ function filter() {
 function containsPhobiaString(value) {
   // TODO: use the phobiasList to check through them all
   // and see if this string includes it
-
-  // for (let i = 0; i < )
-  return true;
+  for (let i = 0; i < phobiasList.length; i++) {
+    console.log(phobiasList[i]);
+    console.log(value);
+    console.log(phobiasList[i].includes(value));
+    if (phobiasList[i].includes(value)) {
+      console.log("FUCK");
+      return true;
+    }
+  }
+  return false;
 }
