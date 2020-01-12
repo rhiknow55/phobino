@@ -1,21 +1,22 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 'use strict';
 
-let changeColor = document.getElementById('changeColor');
+console.log("popup start");
+let toggleButton = document.getElementById('toggleButton');
+let onColor = "#00ff00"
+let offColor = "#ff0000"
+let isOn = true; // Starts true
+chrome.storage.sync.get('toggle', function(data) {
+  isOn = data.toggle;
+  setButtonColor();
+})
 
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-});
+toggleButton.onclick = function(element) {
+  isOn = !isOn;
+  chrome.storage.sync.set({toggle: isOn});
 
-changeColor.onclick = function(element) {
-  let color = element.target.value;
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.executeScript(
-        tabs[0].id,
-        {code: 'document.body.style.backgroundColor = "' + color + '";'});
-  });
+  setButtonColor();
 };
+
+function setButtonColor() {
+  toggleButton.style.backgroundColor = isOn ? onColor : offColor;
+}
